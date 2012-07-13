@@ -1,11 +1,13 @@
 (ns junit (:use clojure.stacktrace))
 
 (defn- junit-version [suite]
+  "Detects whether the unit test is junit 3 or junit 4 and returns the resulting keyword."
   (if (. (Class/forName "junit.framework.TestCase") isAssignableFrom (:class suite))
     :junit3
     :junit4))
 
 (defn- has-annotation [annotation method] 
+  "Checks for an annotation on a java method."
   (. method getAnnotation annotation))
 
 (def is-junit4-test (partial has-annotation org.junit.Test))
@@ -15,6 +17,7 @@
 (def is-junit4-teardown (partial has-annotation org.junit.After))
 
 (defn- has-zero-arguments [method]
+  "Checks that a method has no arguments."
   (= (java.lang.reflect.Array/getLength (. method getParameterTypes)) 0))
 
 (defn- is-junit3-method [name-filter method]
@@ -31,6 +34,7 @@
 (defmethod create-instance :junit4 [suite] (. (:class suite) newInstance))
 
 (defn- methods 
+  "Returns all methods on the test suite class based on a filter."
   ([suite]
   (methods identity suite))
   ([f suite]
@@ -49,9 +53,11 @@
 (defmethod teardown-methods :junit3 [suite] (methods is-junit3-teardown suite))
 
 (defn- create-tests [suite]
+  "Turns all methods in to a test map"
   (map (fn [method] {:method method :success :not-run :error nil :duration -1}) (test-methods suite)))
 
 (defn- add-property [suite property-key property-generator]
+  "Adds a new property to a suite map"
   (assoc suite property-key (property-generator suite)))
 
 (defn create-suite [class]
@@ -65,15 +71,19 @@
       (add-property :teardown-methods teardown-methods))))
 
 (defn- errored [test error]
+  "Mark a test as errored"
   (assoc test :success :error :error error :error-message (. error getMessage)))
 
 (defn- failed [test error]
+  "Mark a test as failed"
   (assoc test :success :failed :error error :error-message (. error getMessage)))
 
 (defn- pass [test]
+  "Mark a test as passed"
   (assoc test :success :passed :error nil :error-message nil))
 
 (defn- invoke-methods [key testsuite] 
+  "Invoke the required methods on the test suite. e.g. key :setup-methods would invoke all set up methods."
   (map #(. % invoke class) (key testsuite)))
   
 (def setup (partial invoke-methods :setup-methods))
@@ -81,6 +91,7 @@
 (def teardown (partial invoke-methods :teardown-methods))
 
 (defn- handle-error [test exception]
+  "Handle a test error and decide whether the test failed or errored"
   (let [actualexception (root-cause exception)]
     (println "Got error in test " (:method test))
     (print-stack-trace actualexception)

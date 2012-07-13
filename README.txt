@@ -1,5 +1,5 @@
 JAT - JUnit Analysis Tool
------------------------------
+--------------------------------------
 Author: JamesR
 URL: https://github.com/SheepCoder/jat
 
@@ -12,8 +12,15 @@ Tests are run in parallel.
 The idea of this project came from a talk by Vladimir Sneblic at Thoughtworks in Manchester.
 In addition the lack of development on JUnit Analysis Server (http://www.junit.org/node/601) provided some motivation.
 
+Introduction to Code
+------------------------------
+The main entry point is the junit-server namespace (work backwards from the execute function).
+A test suite is a junit test class and all tests methods defined in that class.
+A test is a single test method.
+A suite is stored as a record in Mongo with all of its tests.
+
 Setting Up JAT
----------------
+------------------------
 
 1) Download and build the JAT test data
 https://github.com/SheepCoder/jat-testdata
@@ -31,7 +38,7 @@ home$ lein install
 home$ lein test
 
 Using JAT in the Real World
-----------------------------
+--------------------------------------------
 The following shows how to call the execute function with the correct configuration:
 
 (def results (execute {
@@ -51,7 +58,7 @@ The configuration parameters are:
 :classnames		A set of JUnit tests to run (must be on the classpath with all dependencies).
 
 Work Todo
-----------
+------------------
 The current todo list looks a bit like this... [some of these tasks are extremely vague]
 1) Sort out tests so they don't require mongo db.
 2) Allow different DBMSs
