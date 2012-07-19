@@ -107,12 +107,3 @@
   (let [suites (create-suites configuration)]
     (pmap #(run-tests-in % (:build configuration) (:time configuration)) suites)))
 
-(def results (execute {
-          :sorting-alg :most-errored-first 
-          :build "2"
-          :time (java.lang.System/currentTimeMillis)
-          :classnames (map #(java.lang.Class/forName %) (list 
-                        "jamesr.tests.JUnit3TypeTest" 
-                        "jamesr.tests.JUnit4TypeTest" 
-                        "jamesr.tests.JUnit3FailingTest" 
-                        "jamesr.tests.JUnit4FailingTest"))}))
