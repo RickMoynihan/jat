@@ -78,7 +78,8 @@
     (update-test-reports-on-suite build-num start-time suite)))
 
 (defn- update-existing-report-in-db [suite-name suite build-num start-time]
-  (let [oldsuite (db/load-suite suite-name) id { :_id (:_id oldsuite) }]
+  (let [oldsuite (db/load-suite suite-name) 
+        id { :_id (:_id oldsuite) }]
     (db/update-suite id (update-report oldsuite build-num start-time suite))))
 
 (defn store-results [suite build-num start-time]

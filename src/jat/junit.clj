@@ -115,7 +115,9 @@
   "Execute all tests in the given test suite"
   [suite]
   (loop 
-    [test (first (:tests suite)) moretests (rest (:tests suite)) results ()]
+    [test (first (:tests suite)) 
+     moretests (rest (:tests suite)) 
+     results ()]
     (let [new-results (conj results (run-test suite test))]
       (if (empty? moretests)
         (assoc suite :tests new-results)
