@@ -1,5 +1,5 @@
-(ns test.junit
-  (:use junit
+(ns jat.junit
+  (:use jat.junit
         clojure.test
         clojure.stacktrace))
 

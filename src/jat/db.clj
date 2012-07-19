@@ -1,4 +1,4 @@
-(ns junit-db (:require [somnium.congomongo :as congo]))
+(ns jat.db (:require [somnium.congomongo :as congo]))
 
 (def connection (congo/make-connection "junit"))
 

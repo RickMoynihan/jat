@@ -1,4 +1,4 @@
-(ns junit-sort)
+(ns jat.sort)
 
 (defn create-map 
   "Creates a map of the sequence of suites based keyed by the suite name"

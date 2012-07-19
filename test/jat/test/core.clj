@@ -1,7 +1,7 @@
-(ns test.junit-server 
+(ns jat.test.core
   (:use 
-    junit-server 
-    junit 
+    jat.core 
+    jat.junit
     clojure.test))
 
 (def junit4-test (java.lang.Class/forName "jamesr.tests.JUnit4TypeTest"))

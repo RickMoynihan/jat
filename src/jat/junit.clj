@@ -1,4 +1,4 @@
-(ns junit (:use clojure.stacktrace))
+(ns jat.junit (:use clojure.stacktrace))
 
 (defn- junit-version [suite]
   "Detects whether the unit test is junit 3 or junit 4 and returns the resulting keyword."

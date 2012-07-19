@@ -1,6 +1,6 @@
-(ns test.junit-sort
+(ns jat.test.sort
   (:use 
-    [junit-sort :as sort] clojure.test))
+    [jat.sort :as sort] clojure.test))
 
 (deftest should-create-map-keyed-on-name []
   (let [suites (list {:name "jim"} {:name "al" :age 33}) suites-map (create-map :name suites)]

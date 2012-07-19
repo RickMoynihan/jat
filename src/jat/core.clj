@@ -1,4 +1,4 @@
-(ns junit-server (:require [junit] [junit-db :as db] [junit-sort :as sort]))
+(ns jat.core (:require [jat.junit :as junit] [jat.db :as db] [jat.sort :as sort]))
 
 (defn- new-test-report [build-num start-time test]
   "Create a new test report map"
