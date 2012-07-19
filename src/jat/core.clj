@@ -2,7 +2,7 @@
 
 (defn- new-test-report [build-num start-time test]
   "Create a new test report map"
-  {:name (. (:method test) getName) :test-history ()})
+  {:name (.getName (:method test)) :test-history ()})
 
 (defn- append-test-history [test-report build-num start-time test]
   "Add test history to a test"
@@ -83,7 +83,7 @@
 
 (defn store-results [suite build-num start-time]
   "Persist a suite, either as new or existing"
-  (let [suite-name (. (:class suite) getName)]
+  (let [suite-name (.getName (:class suite))]
     (if (db/suite-exists? suite-name)
       (update-existing-report-in-db suite-name suite build-num start-time)
       (db/save-suite (create-new-report build-num start-time suite)))))
