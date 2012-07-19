@@ -60,9 +60,14 @@ The configuration parameters are:
 Work Todo
 ------------------
 The current todo list looks a bit like this... [some of these tasks are extremely vague]
-1) Sort out tests so they don't require mongo db.
-2) Allow different DBMSs
-3) Add additional sorting algorithms for ordering tests
-4) A pretty web front end for viewing results
-5) Sort out logging test results out (along with any output from tests). e.g. in similar way to JUnit
-6) Wrapping whole tool up in an ANT task (and/or maven plugin) to allow for use in real projects.
+1) Data model: move to test level records. Improve definition of data. Improve how data is manipulated.
+2) DB Layer, extract protocol, default implementation to write to file
+3) Sort out tests so they don't require mongo db, use dummy implementation of protocol.
+4) Allow different DBMSs
+5) Look at how the sort is applied how can this work with creating tests lazily? (remove multi method for sorting)
+6) Add additional sorting algorithms for ordering tests
+7) A pretty web front end for viewing results
+8) Sort out logging test results out (along with any output from tests). e.g. in similar way to JUnit
+9) Wrapping whole tool up in an ANT task (and/or maven plugin) to allow for use in real projects.
+10) How are tests run in parallel? Think about extracting execution strategy.
+11) Can this be extended to run clojure.test tests?
